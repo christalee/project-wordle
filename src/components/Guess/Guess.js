@@ -1,11 +1,11 @@
 import React from "react";
 
-function Guess() {
+function Guess({ previousGuesses, setPreviousGuesses }) {
   const [guess, setGuess] = React.useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(guess);
-    setGuess('');
+    setPreviousGuesses([...previousGuesses, {id: Math.random(), text: guess}]);
+    setGuess("");
   };
   return (
     <>
@@ -14,7 +14,7 @@ function Guess() {
         <input
           id="guess-input"
           type="text"
-          pattern={'[A-Z]{5,5}'}
+          pattern={"[A-Z]{5,5}"}
           value={guess}
           onChange={(event) => setGuess(event.target.value.toUpperCase())}
         />
