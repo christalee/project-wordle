@@ -1,2 +1,2 @@
-export * from 'src/components/GuessInput/GuessInput';
-export { default } from 'src/components/GuessInput/GuessInput';
+export * from './GuessInput';
+export { default } from './GuessInput';
