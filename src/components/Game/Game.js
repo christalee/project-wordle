@@ -17,7 +17,9 @@ function Game() {
     <>
       <div className="guess-results">
         {range(NUM_OF_GUESSES_ALLOWED).map((num) => (
-          <Guess guess={previousGuesses[num]} key={num} />
+          <Guess guess={previousGuesses[num]}
+                 answer={answer}
+                 key={num} />
         ))}
       </div>
       <GuessInput
