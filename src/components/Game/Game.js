@@ -13,18 +13,32 @@ console.info({ answer });
 
 function Game() {
   const [previousGuesses, setPreviousGuesses] = React.useState([]);
+  const [gameStatus, setGameStatus] = React.useState("");
+
+  React.useEffect(() => {
+    if (previousGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
+      setGameStatus("lost");
+    }
+    if (
+      previousGuesses.length > 0 &&
+      previousGuesses[previousGuesses.length - 1].text === answer
+    ) {
+      setGameStatus("won");
+    }
+  }, [previousGuesses]);
+
   return (
     <>
       <div className="guess-results">
         {range(NUM_OF_GUESSES_ALLOWED).map((num) => (
-          <Guess guess={previousGuesses[num]}
-                 answer={answer}
-                 key={num} />
+          <Guess guess={previousGuesses[num]} answer={answer} key={num} />
         ))}
       </div>
       <GuessInput
         previousGuesses={previousGuesses}
         setPreviousGuesses={setPreviousGuesses}
+        gameStatus={gameStatus}
+        answer={answer}
       />
     </>
   );
