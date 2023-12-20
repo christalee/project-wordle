@@ -1,9 +1,13 @@
 import React from "react";
 import { WORD_LENGTH } from "../../constants";
 
-function GuessInput({ previousGuesses, setPreviousGuesses, gameStatus, answer }) {
+function GuessInput({
+  previousGuesses,
+  setPreviousGuesses,
+  gameStatus,
+  answer,
+}) {
   const [guess, setGuess] = React.useState("");
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,11 +21,20 @@ function GuessInput({ previousGuesses, setPreviousGuesses, gameStatus, answer })
   const bannerVars = {
     lost: {
       divClass: "sad",
-      message: (<p>Sorry, the answer is <strong>{answer}</strong>.</p>),
+      message: (
+        <p>
+          Sorry, the answer is <strong>{answer}</strong>.
+        </p>
+      ),
     },
     won: {
       divClass: "happy",
-      message: (<p><strong>Congratulations!</strong> Got it in <strong>{previousGuesses.length} guesses</strong>.</p>),
+      message: (
+        <p>
+          <strong>Congratulations!</strong> Got it in{" "}
+          <strong>{previousGuesses.length} guesses</strong>.
+        </p>
+      ),
     },
   };
 
@@ -33,7 +46,9 @@ function GuessInput({ previousGuesses, setPreviousGuesses, gameStatus, answer })
       <input
         id="guess-input"
         type="text"
+        required
         pattern={`[A-Z]{${WORD_LENGTH},${WORD_LENGTH}}`}
+        title={`${WORD_LENGTH} letters`}
         value={guess}
         onChange={(event) => setGuess(event.target.value.toUpperCase())}
       />
